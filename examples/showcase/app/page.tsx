@@ -56,6 +56,30 @@ const examples = [
     color: "from-pink-500/20 to-rose-500/20",
     border: "border-pink-500/30",
   },
+  {
+    name: "Pixel Art",
+    href: "/pixel",
+    description:
+      "Retro pixel art from prompts — characters, items, and scenes on a constrained grid",
+    color: "from-lime-500/20 to-green-500/20",
+    border: "border-lime-500/30",
+  },
+  {
+    name: "Infographic",
+    href: "/infographic",
+    description:
+      "Data-driven visual stories with stats, charts, timelines, and callouts",
+    color: "from-sky-500/20 to-blue-500/20",
+    border: "border-sky-500/30",
+  },
+  {
+    name: "Generative Art",
+    href: "/generative-art",
+    description:
+      "Abstract SVG compositions — shapes, curves, and color palettes from your imagination",
+    color: "from-fuchsia-500/20 to-violet-500/20",
+    border: "border-fuchsia-500/30",
+  },
 ];
 
 export default function HomePage() {
