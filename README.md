@@ -66,6 +66,24 @@ AI generates video timeline JSON (composition, tracks, clips). Remotion renders 
 
 ![Remotion Example](docs/screenshots/example-remotion.png)
 
+### Pixel Art
+
+Retro pixel art on a constrained grid. AI picks a palette and draws characters, items, and scenes pixel by pixel.
+
+![Pixel Art Example](docs/screenshots/example-pixel.png)
+
+### Infographic
+
+Data-driven visual stories with stat cards, bar charts, timelines, callouts, and comparisons.
+
+![Infographic Example](docs/screenshots/example-infographic.png)
+
+### Generative Art
+
+Abstract SVG compositions — circles, rectangles, paths, and groups. AI creates art from a prompt, rendered as inline SVG.
+
+![Generative Art Example](docs/screenshots/example-generative-art.png)
+
 ---
 
 ## Quick Start
