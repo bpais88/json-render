@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: oklch(0.12 0.01 260);
+  --color-foreground: oklch(0.93 0.01 80);
+  --color-muted: oklch(0.2 0.01 260);
+  --color-muted-foreground: oklch(0.6 0.02 80);
+  --color-border: oklch(0.25 0.02 260);
+  --color-primary: oklch(0.75 0.15 80);
+  --color-primary-foreground: oklch(0.15 0.01 260);
+  --color-accent: oklch(0.65 0.15 150);
+  --color-danger: oklch(0.65 0.2 25);
+  --radius: 0.5rem;
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-geist-sans), Georgia, serif;
+}
+
+/* Typewriter effect for narrative text */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.narrative-text {
+  animation: fadeIn 0.4s ease-out;
+}
+
+/* Choice hover glow */
+.choice-button {
+  transition: all 0.2s ease;
+}
+
+.choice-button:hover {
+  box-shadow: 0 0 20px oklch(0.75 0.15 80 / 0.15);
+}
+
+/* Parchment texture for game area */
+.game-frame {
+  background:
+    radial-gradient(ellipse at 30% 20%, oklch(0.18 0.015 260) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 80%, oklch(0.16 0.02 280) 0%, transparent 50%),
+    var(--color-background);
+}
+
+/* Status bar glow */
+.stat-value {
+  text-shadow: 0 0 8px currentColor;
+}

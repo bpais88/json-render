@@ -1,0 +1,302 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #ffffff;
+  --color-foreground: #1a1a1a;
+  --color-muted: #f5f5f5;
+  --color-muted-foreground: #737373;
+  --color-border: #e5e5e5;
+  --color-primary: #404040;
+  --color-primary-foreground: #ffffff;
+  --font-mono: "var(--font-geist-mono)", ui-monospace, monospace;
+  --radius: 4px;
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+body {
+  background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 19px,
+      #f0f0f0 19px,
+      #f0f0f0 20px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 19px,
+      #f0f0f0 19px,
+      #f0f0f0 20px
+    );
+  background-size: 20px 20px;
+  color: var(--color-foreground);
+  font-family: var(--font-mono);
+}
+
+/* =============================================================================
+   Screen
+   ============================================================================= */
+
+.wf-screen {
+  border: 2px dashed #9ca3af;
+  border-radius: 8px;
+  background: white;
+  overflow: hidden;
+  box-shadow: 4px 4px 0 #e5e7eb;
+}
+
+.wf-screen-header {
+  border-bottom: 2px dashed #d1d5db;
+  padding: 8px 12px;
+  background: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wf-screen-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* =============================================================================
+   Navbar
+   ============================================================================= */
+
+.wf-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border: 1px dashed #d1d5db;
+  border-radius: 4px;
+  background: #fafafa;
+}
+
+/* =============================================================================
+   Sidebar
+   ============================================================================= */
+
+.wf-sidebar {
+  border: 1px dashed #d1d5db;
+  border-radius: 4px;
+  padding: 8px;
+  background: #fafafa;
+  min-width: 160px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.wf-sidebar-item {
+  padding: 6px 8px;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  color: #6b7280;
+  border-radius: 3px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.wf-sidebar-active {
+  background: #e5e7eb;
+  color: #1f2937;
+  font-weight: 600;
+}
+
+/* =============================================================================
+   Form Elements
+   ============================================================================= */
+
+.wf-input {
+  border: 2px dashed #d1d5db;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-family: var(--font-mono);
+  background: white;
+}
+
+/* =============================================================================
+   Button
+   ============================================================================= */
+
+.wf-btn {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  border: 2px dashed transparent;
+}
+
+.wf-btn-primary {
+  background: #404040;
+  color: white;
+  border-color: #404040;
+}
+
+.wf-btn-secondary {
+  background: #e5e7eb;
+  color: #374151;
+  border-color: #d1d5db;
+}
+
+.wf-btn-outline {
+  background: white;
+  color: #374151;
+  border-color: #9ca3af;
+  border-style: dashed;
+}
+
+.wf-btn-danger {
+  background: #fecaca;
+  color: #dc2626;
+  border-color: #fca5a5;
+}
+
+.wf-btn-ghost {
+  background: transparent;
+  color: #6b7280;
+  border-color: transparent;
+  text-decoration: underline;
+  text-decoration-style: dashed;
+}
+
+/* =============================================================================
+   Card
+   ============================================================================= */
+
+.wf-card {
+  border: 2px dashed #d1d5db;
+  border-radius: 6px;
+  padding: 16px;
+  background: white;
+}
+
+/* =============================================================================
+   Table
+   ============================================================================= */
+
+.wf-table-wrapper {
+  border: 1px dashed #d1d5db;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.wf-th {
+  text-align: left;
+  padding: 8px 12px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 2px dashed #d1d5db;
+  background: #fafafa;
+}
+
+.wf-td {
+  padding: 8px 12px;
+  border-bottom: 1px dashed #e5e7eb;
+}
+
+/* =============================================================================
+   Image Placeholder
+   ============================================================================= */
+
+.wf-img {
+  position: relative;
+  border: 2px dashed #d1d5db;
+  border-radius: 4px;
+  background: #f9fafb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* =============================================================================
+   Modal
+   ============================================================================= */
+
+.wf-modal-backdrop {
+  position: relative;
+  border: 2px dashed #9ca3af;
+  border-radius: 6px;
+  background: repeating-linear-gradient(
+    45deg,
+    #f3f4f6,
+    #f3f4f6 5px,
+    #e5e7eb 5px,
+    #e5e7eb 6px
+  );
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wf-modal {
+  width: 100%;
+  border: 2px dashed #9ca3af;
+  border-radius: 6px;
+  background: white;
+  padding: 16px;
+  box-shadow: 4px 4px 0 #d1d5db;
+}
+
+/* =============================================================================
+   Toast
+   ============================================================================= */
+
+.wf-toast {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border: 1px dashed #d1d5db;
+  border-left: 4px solid;
+  border-radius: 4px;
+  padding: 8px 12px;
+  background: white;
+  max-width: 320px;
+  margin-left: auto;
+}
+
+/* =============================================================================
+   Annotation
+   ============================================================================= */
+
+.wf-annotation {
+  display: inline-block;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  padding: 6px 10px;
+  border: 1px dashed;
+  border-radius: 2px;
+  transform: rotate(-1deg);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+/* =============================================================================
+   Animations
+   ============================================================================= */
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.wf-screen {
+  animation: fadeIn 0.4s ease-out;
+}

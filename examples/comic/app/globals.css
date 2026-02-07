@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: oklch(0.95 0.01 80);
+  --color-foreground: oklch(0.15 0.01 260);
+  --color-muted: oklch(0.9 0.01 80);
+  --color-muted-foreground: oklch(0.45 0.02 260);
+  --color-border: oklch(0.2 0.01 260);
+  --color-primary: oklch(0.55 0.2 25);
+  --color-primary-foreground: oklch(0.98 0 0);
+  --color-panel-bg: oklch(0.98 0.005 80);
+  --radius: 0.25rem;
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-geist-sans), "Comic Sans MS", cursive, system-ui;
+}
+
+/* Comic panel style */
+.comic-panel {
+  background: var(--color-panel-bg);
+  border: 3px solid var(--color-border);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 4px 4px 0 oklch(0.2 0.01 260 / 0.15);
+}
+
+/* Speech bubble */
+.speech-bubble {
+  position: relative;
+  background: white;
+  border: 2.5px solid var(--color-border);
+  border-radius: 18px;
+  padding: 10px 14px;
+  max-width: 85%;
+}
+
+.speech-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -12px;
+  left: 20px;
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 14px solid white;
+  filter: drop-shadow(0 2px 0 var(--color-border));
+}
+
+.speech-bubble::before {
+  content: "";
+  position: absolute;
+  bottom: -15px;
+  left: 19px;
+  width: 0;
+  height: 0;
+  border-left: 13px solid transparent;
+  border-right: 13px solid transparent;
+  border-top: 16px solid var(--color-border);
+}
+
+/* Thought bubble */
+.thought-bubble {
+  position: relative;
+  background: white;
+  border: 2.5px solid var(--color-border);
+  border-radius: 24px;
+  padding: 10px 14px;
+  max-width: 85%;
+}
+
+.thought-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -18px;
+  left: 24px;
+  width: 10px;
+  height: 10px;
+  background: white;
+  border: 2px solid var(--color-border);
+  border-radius: 50%;
+}
+
+.thought-bubble .thought-dot {
+  position: absolute;
+  bottom: -28px;
+  left: 20px;
+  width: 6px;
+  height: 6px;
+  background: white;
+  border: 2px solid var(--color-border);
+  border-radius: 50%;
+}
+
+/* Narration box */
+.narration-box {
+  background: oklch(0.92 0.03 80);
+  border: 2px solid var(--color-border);
+  padding: 8px 12px;
+  font-style: italic;
+}
+
+/* Sound effect */
+.sfx-text {
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-shadow: 2px 2px 0 oklch(0.2 0.01 260 / 0.2);
+  transform: rotate(-3deg);
+}
+
+/* Page animation */
+@keyframes panelIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.comic-panel {
+  animation: panelIn 0.3s ease-out;
+}
