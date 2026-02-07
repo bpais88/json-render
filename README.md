@@ -18,6 +18,56 @@ When users prompt for UI, you need guarantees. json-render gives AI a **constrai
 - **Predictable** — JSON output matches your schema, every time
 - **Fast** — Stream and render progressively as the model responds
 
+## Live Showcase
+
+Try the live showcase at **[jr-showcase.vercel.app](https://jr-showcase.vercel.app)**
+
+![Showcase Landing](docs/screenshots/showcase-landing.png)
+
+### Comic Generator
+
+AI generates multi-panel comic strips as structured JSON. Custom renderers handle panels, speech bubbles, and captions.
+
+![Comic Example](docs/screenshots/example-comic.png)
+
+### Wireframe Builder
+
+Prompt-to-wireframe in seconds. Components include cards, forms, tables, navigation, and pricing layouts.
+
+![Wireframe Example](docs/screenshots/example-wireframes.png)
+
+### Mermaid Diagrams
+
+AI produces Mermaid syntax constrained by the catalog. Rendered client-side with live preview.
+
+![Mermaid Example](docs/screenshots/example-mermaid.png)
+
+### Slide Deck Presenter
+
+Full presentation decks with multiple layouts, backgrounds, code blocks, and bullet lists — all streamed progressively.
+
+![Slides Example](docs/screenshots/example-slides.png)
+
+### Interactive Adventure
+
+Choose-your-own-adventure game with themed scenes, choices, and inventory — rendered from a single JSON spec.
+
+![Adventure Example](docs/screenshots/example-adventure.png)
+
+### Flow Diagrams
+
+Interactive node-based diagrams powered by React Flow. AI generates the graph structure, the renderer handles layout and interaction.
+
+![Diagrams Example](docs/screenshots/example-diagrams.png)
+
+### Remotion Video
+
+AI generates video timeline JSON (composition, tracks, clips). Remotion renders it as a playable video with title cards, images, and transitions.
+
+![Remotion Example](docs/screenshots/example-remotion.png)
+
+---
+
 ## Quick Start
 
 ### 1. Define Your Catalog
@@ -213,8 +263,12 @@ const systemPrompt = catalog.prompt();
 
 ## Demo
 
+Try the live showcase: **[jr-showcase.vercel.app](https://jr-showcase.vercel.app)**
+
+Or run locally:
+
 ```bash
-git clone https://github.com/vercel-labs/json-render
+git clone https://github.com/bpais88/json-render
 cd json-render
 pnpm install
 pnpm dev
@@ -223,6 +277,7 @@ pnpm dev
 - http://localhost:3000 — Docs & Playground
 - http://localhost:3001 — Example Dashboard
 - http://localhost:3002 — Remotion Video Example
+- http://localhost:3010 — Showcase (all examples)
 
 ## How It Works
 
