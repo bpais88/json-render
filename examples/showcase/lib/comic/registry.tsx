@@ -96,7 +96,7 @@ const componentRenderers: Record<
         </div>
 
         {/* Panel grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 auto-rows-[200px] md:auto-rows-[250px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 auto-rows-[280px] sm:auto-rows-[200px] md:auto-rows-[250px]">
           {children}
         </div>
       </div>
@@ -149,11 +149,11 @@ const componentRenderers: Record<
           style={isRight ? { transform: "scaleX(-1)" } : undefined}
         >
           <div style={isRight ? { transform: "scaleX(-1)" } : undefined}>
-            <div className="text-[9px] font-bold uppercase tracking-wider text-muted-foreground mb-0.5">
+            <div className="text-xs sm:text-[9px] font-bold uppercase tracking-wider text-muted-foreground mb-0.5">
               {speaker}
             </div>
             <p
-              className={`text-sm leading-snug ${emphasis ? "font-black text-base" : ""}`}
+              className={`text-base sm:text-sm leading-snug ${emphasis ? "font-black text-lg sm:text-base" : ""}`}
             >
               {text}
             </p>
@@ -177,10 +177,10 @@ const componentRenderers: Record<
       >
         <div className="thought-bubble">
           <span className="thought-dot" />
-          <div className="text-[9px] font-bold uppercase tracking-wider text-muted-foreground/60 mb-0.5">
+          <div className="text-xs sm:text-[9px] font-bold uppercase tracking-wider text-muted-foreground/60 mb-0.5">
             {speaker}
           </div>
-          <p className="text-sm italic text-foreground/70 leading-snug">
+          <p className="text-base sm:text-sm italic text-foreground/70 leading-snug">
             {text}
           </p>
         </div>
@@ -195,7 +195,7 @@ const componentRenderers: Record<
     return (
       <div className={`${position === "bottom" ? "mt-auto" : ""}`}>
         <div className="narration-box">
-          <p className="text-xs leading-relaxed">{text}</p>
+          <p className="text-sm sm:text-xs leading-relaxed">{text}</p>
         </div>
       </div>
     );
@@ -229,9 +229,9 @@ const componentRenderers: Record<
     return (
       <div className={`${align} mt-auto`}>
         <div className="bg-white border-2 border-foreground px-2 py-1 inline-block">
-          <div className="text-xs font-black uppercase">{name}</div>
+          <div className="text-sm sm:text-xs font-black uppercase">{name}</div>
           {description && (
-            <div className="text-[9px] text-muted-foreground italic">
+            <div className="text-xs sm:text-[9px] text-muted-foreground italic">
               {description}
             </div>
           )}

@@ -69,43 +69,19 @@ const componentRenderers: Record<
 
     return (
       <div
+        className="max-w-full sm:max-w-2xl md:max-w-3xl mx-auto p-4 sm:p-6 md:p-8 rounded-xl"
         style={{
           background: "#111111",
           borderTop: `4px solid ${colors.primary}`,
-          borderRadius: "12px",
-          padding: "32px",
-          maxWidth: "800px",
-          margin: "0 auto",
         }}
       >
-        <div style={{ textAlign: "center", marginBottom: "32px" }}>
-          <h1
-            style={{
-              fontSize: "32px",
-              fontWeight: 800,
-              color: "#ffffff",
-              margin: 0,
-              lineHeight: 1.2,
-            }}
-          >
+        <div className="text-center mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white leading-tight">
             {title}
           </h1>
-          {subtitle && (
-            <p
-              style={{
-                fontSize: "14px",
-                color: "#9ca3af",
-                marginTop: "8px",
-                margin: "8px 0 0 0",
-              }}
-            >
-              {subtitle}
-            </p>
-          )}
+          {subtitle && <p className="text-sm text-gray-400 mt-2">{subtitle}</p>}
         </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
-          {children}
-        </div>
+        <div className="flex flex-col gap-5 sm:gap-6">{children}</div>
       </div>
     );
   },
@@ -113,13 +89,7 @@ const componentRenderers: Record<
   StatRow: (element, ctx) => {
     const children = renderChildren(element, ctx);
     return (
-      <div
-        style={{
-          display: "flex",
-          gap: "16px",
-          flexWrap: "wrap",
-        }}
-      >
+      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 flex-wrap">
         {children}
       </div>
     );
@@ -132,39 +102,20 @@ const componentRenderers: Record<
 
     return (
       <div
+        className="min-w-full sm:min-w-[140px] flex-1 rounded-lg p-4 sm:p-5 text-center"
         style={{
-          flex: "1 1 140px",
           background: "#1a1a1a",
-          borderRadius: "8px",
-          padding: "20px",
-          textAlign: "center",
           border: "1px solid #2a2a2a",
         }}
       >
-        {icon && (
-          <div style={{ fontSize: "24px", marginBottom: "8px" }}>
-            {iconEmojis[icon] ?? ""}
-          </div>
-        )}
+        {icon && <div className="text-2xl mb-2">{iconEmojis[icon] ?? ""}</div>}
         <div
-          style={{
-            fontSize: "28px",
-            fontWeight: 800,
-            color: ctx.theme.primary,
-            lineHeight: 1.2,
-          }}
+          className="text-2xl sm:text-3xl font-extrabold leading-tight"
+          style={{ color: ctx.theme.primary }}
         >
           {value}
         </div>
-        <div
-          style={{
-            fontSize: "12px",
-            color: "#9ca3af",
-            marginTop: "6px",
-            textTransform: "uppercase",
-            letterSpacing: "0.05em",
-          }}
-        >
+        <div className="text-xs text-gray-400 mt-1.5 uppercase tracking-wider">
           {label}
         </div>
       </div>
@@ -177,28 +128,18 @@ const componentRenderers: Record<
 
     return (
       <div
+        className="rounded-lg p-4 sm:p-5"
         style={{
           background: "#1a1a1a",
-          borderRadius: "8px",
-          padding: "20px",
           border: "1px solid #2a2a2a",
         }}
       >
         {title && (
-          <div
-            style={{
-              fontSize: "14px",
-              fontWeight: 600,
-              color: "#e5e7eb",
-              marginBottom: "16px",
-            }}
-          >
+          <div className="text-sm font-semibold text-gray-200 mb-3 sm:mb-4">
             {title}
           </div>
         )}
-        <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-          {children}
-        </div>
+        <div className="flex flex-col gap-3">{children}</div>
       </div>
     );
   },
@@ -210,45 +151,23 @@ const componentRenderers: Record<
     const clampedValue = Math.max(0, Math.min(100, value));
 
     return (
-      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-        <div
-          style={{
-            width: "100px",
-            fontSize: "12px",
-            color: "#d1d5db",
-            flexShrink: 0,
-            textAlign: "right",
-          }}
-        >
+      <div className="flex items-center gap-2 sm:gap-3">
+        <div className="w-20 sm:w-24 shrink-0 text-xs text-gray-300 text-right">
           {label}
         </div>
         <div
-          style={{
-            flex: 1,
-            height: "24px",
-            background: "#0a0a0a",
-            borderRadius: "4px",
-            overflow: "hidden",
-          }}
+          className="flex-1 h-5 sm:h-6 rounded overflow-hidden"
+          style={{ background: "#0a0a0a" }}
         >
           <div
+            className="h-full rounded transition-[width] duration-700 ease-out"
             style={{
               width: `${clampedValue}%`,
-              height: "100%",
               background: color,
-              borderRadius: "4px",
-              transition: "width 0.8s ease-out",
             }}
           />
         </div>
-        <div
-          style={{
-            width: "40px",
-            fontSize: "12px",
-            color: "#9ca3af",
-            flexShrink: 0,
-          }}
-        >
+        <div className="w-10 shrink-0 text-xs text-gray-400">
           {clampedValue}%
         </div>
       </div>
@@ -261,40 +180,22 @@ const componentRenderers: Record<
 
     return (
       <div
+        className="rounded-lg p-4 sm:p-5"
         style={{
           background: "#1a1a1a",
-          borderRadius: "8px",
-          padding: "20px",
           border: "1px solid #2a2a2a",
         }}
       >
         {title && (
-          <div
-            style={{
-              fontSize: "14px",
-              fontWeight: 600,
-              color: "#e5e7eb",
-              marginBottom: "16px",
-            }}
-          >
+          <div className="text-sm font-semibold text-gray-200 mb-3 sm:mb-4">
             {title}
           </div>
         )}
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "0px",
-            position: "relative",
-            paddingLeft: "24px",
-          }}
-        >
+        <div className="relative pl-4 sm:pl-6">
           <div
+            className="absolute top-2 bottom-2"
             style={{
-              position: "absolute",
               left: "7px",
-              top: "8px",
-              bottom: "8px",
               width: "2px",
               background: "#333333",
             }}
@@ -471,79 +372,45 @@ const componentRenderers: Record<
       winner === "right" ? `0 0 12px ${ctx.theme.primary}40` : "none";
 
     return (
-      <div style={{ display: "flex", gap: "12px", alignItems: "stretch" }}>
+      <div className="flex flex-col sm:flex-row gap-3 items-stretch">
         <div
+          className="flex-1 rounded-lg p-4 text-center"
           style={{
-            flex: 1,
             background: "#1a1a1a",
-            borderRadius: "8px",
-            padding: "16px",
-            textAlign: "center",
             border: leftBorder,
             boxShadow: leftShadow,
           }}
         >
           <div
-            style={{
-              fontSize: "24px",
-              fontWeight: 800,
-              color: winner === "left" ? ctx.theme.primary : "#e5e7eb",
-            }}
+            className="text-xl sm:text-2xl font-extrabold"
+            style={{ color: winner === "left" ? ctx.theme.primary : "#e5e7eb" }}
           >
             {leftValue}
           </div>
-          <div
-            style={{
-              fontSize: "12px",
-              color: "#9ca3af",
-              marginTop: "4px",
-              textTransform: "uppercase",
-              letterSpacing: "0.05em",
-            }}
-          >
+          <div className="text-xs text-gray-400 mt-1 uppercase tracking-wider">
             {leftLabel}
           </div>
         </div>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            fontSize: "14px",
-            color: "#4b5563",
-            fontWeight: 700,
-          }}
-        >
+        <div className="flex items-center justify-center text-sm text-gray-600 font-bold">
           vs
         </div>
         <div
+          className="flex-1 rounded-lg p-4 text-center"
           style={{
-            flex: 1,
             background: "#1a1a1a",
-            borderRadius: "8px",
-            padding: "16px",
-            textAlign: "center",
             border: rightBorder,
             boxShadow: rightShadow,
           }}
         >
           <div
+            className="text-xl sm:text-2xl font-extrabold"
             style={{
-              fontSize: "24px",
-              fontWeight: 800,
               color: winner === "right" ? ctx.theme.primary : "#e5e7eb",
             }}
           >
             {rightValue}
           </div>
-          <div
-            style={{
-              fontSize: "12px",
-              color: "#9ca3af",
-              marginTop: "4px",
-              textTransform: "uppercase",
-              letterSpacing: "0.05em",
-            }}
-          >
+          <div className="text-xs text-gray-400 mt-1 uppercase tracking-wider">
             {rightLabel}
           </div>
         </div>
@@ -555,13 +422,9 @@ const componentRenderers: Record<
     const children = renderChildren(element, ctx);
     return (
       <div
+        className="flex flex-col gap-2 rounded-lg p-4"
         style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "8px",
           background: "#1a1a1a",
-          borderRadius: "8px",
-          padding: "16px",
           border: "1px solid #2a2a2a",
         }}
       >

@@ -277,7 +277,7 @@ export default function SlidesPage() {
   return (
     <div className="min-h-screen slides-theme">
       {/* Hero */}
-      <section className="max-w-6xl mx-auto px-6 pt-20 pb-12 text-center">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-20 pb-12 text-center">
         <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tighter mb-6">
           Slide Deck
         </h1>
@@ -305,7 +305,7 @@ export default function SlidesPage() {
                 <button
                   type="button"
                   onClick={() => setIsGenerating(false)}
-                  className="w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center hover:bg-primary/90 transition-colors"
+                  className="w-11 h-11 sm:w-8 sm:h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center hover:bg-primary/90 transition-colors"
                 >
                   <svg
                     width="12"
@@ -320,7 +320,7 @@ export default function SlidesPage() {
                 <button
                   type="submit"
                   disabled={!prompt.trim()}
-                  className="w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center hover:bg-primary/90 transition-colors disabled:opacity-30"
+                  className="w-11 h-11 sm:w-8 sm:h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center hover:bg-primary/90 transition-colors disabled:opacity-30"
                 >
                   <svg
                     width="14"
@@ -343,7 +343,7 @@ export default function SlidesPage() {
               <button
                 key={p}
                 onClick={() => generate(p)}
-                className="text-xs px-3 py-1.5 rounded-full border border-border text-muted-foreground hover:text-foreground hover:border-foreground/50 transition-colors"
+                className="text-sm sm:text-xs px-4 py-2.5 sm:px-3 sm:py-1.5 rounded-full border border-border text-muted-foreground hover:text-foreground hover:border-foreground/50 transition-colors"
               >
                 {p}
               </button>
@@ -358,7 +358,7 @@ export default function SlidesPage() {
         )}
 
         {/* Main content: Slide Preview + JSON */}
-        <div className="max-w-6xl mx-auto grid lg:grid-cols-[1.5fr_1fr] gap-4">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-4">
           {/* Slide Preview */}
           <div>
             <div className="flex items-center justify-between mb-2 h-6">
@@ -426,7 +426,7 @@ export default function SlidesPage() {
                     setCurrentSlide((prev) => Math.max(prev - 1, 0))
                   }
                   disabled={currentSlide === 0}
-                  className="p-2 rounded border border-border text-muted-foreground hover:text-foreground hover:border-foreground/50 transition-colors disabled:opacity-30"
+                  className="p-3 sm:p-2 rounded border border-border text-muted-foreground hover:text-foreground hover:border-foreground/50 transition-colors disabled:opacity-30"
                 >
                   <svg
                     width="16"
@@ -464,7 +464,7 @@ export default function SlidesPage() {
                     )
                   }
                   disabled={currentSlide === totalSlides - 1}
-                  className="p-2 rounded border border-border text-muted-foreground hover:text-foreground hover:border-foreground/50 transition-colors disabled:opacity-30"
+                  className="p-3 sm:p-2 rounded border border-border text-muted-foreground hover:text-foreground hover:border-foreground/50 transition-colors disabled:opacity-30"
                 >
                   <svg
                     width="16"

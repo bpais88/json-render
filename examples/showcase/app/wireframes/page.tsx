@@ -103,8 +103,8 @@ export default function WireframePage() {
 
   return (
     <div className="min-h-screen wireframe-theme">
-      <header className="max-w-4xl mx-auto px-6 pt-12 pb-8 text-center">
-        <h1 className="text-4xl font-black tracking-tight mb-3 font-mono">
+      <header className="max-w-4xl mx-auto px-4 sm:px-6 pt-12 pb-8 text-center">
+        <h1 className="text-3xl sm:text-4xl font-black tracking-tight mb-3 font-mono">
           Wireframes
         </h1>
         <p className="text-gray-700 text-sm max-w-lg mx-auto font-mono">
@@ -112,7 +112,7 @@ export default function WireframePage() {
         </p>
       </header>
 
-      <div className="max-w-3xl mx-auto px-6 mb-8">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 mb-8">
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -140,7 +140,7 @@ export default function WireframePage() {
               <button
                 type="submit"
                 disabled={!prompt.trim()}
-                className="w-7 h-7 rounded border-2 border-dashed border-gray-400 bg-gray-100 text-gray-600 flex items-center justify-center hover:bg-gray-200 transition-colors disabled:opacity-30 font-mono"
+                className="w-11 h-11 sm:w-8 sm:h-8 rounded border-2 border-dashed border-gray-400 bg-gray-100 text-gray-600 flex items-center justify-center hover:bg-gray-200 transition-colors disabled:opacity-30 font-mono"
               >
                 &rarr;
               </button>
@@ -154,7 +154,7 @@ export default function WireframePage() {
               key={ex.label}
               onClick={() => generate(ex.prompt)}
               disabled={isGenerating}
-              className="text-xs px-3 py-1.5 rounded border border-dashed border-gray-400 text-gray-700 hover:text-gray-900 hover:border-gray-600 hover:bg-white transition-colors disabled:opacity-30 font-mono"
+              className="text-sm sm:text-xs px-4 py-2.5 sm:px-3 sm:py-1.5 rounded border border-dashed border-gray-400 text-gray-700 hover:text-gray-900 hover:border-gray-600 hover:bg-white transition-colors disabled:opacity-30 font-mono"
             >
               {ex.label}
             </button>
@@ -168,7 +168,7 @@ export default function WireframePage() {
         )}
       </div>
 
-      <main className="max-w-5xl mx-auto px-6 pb-16">
+      <main className="max-w-5xl mx-auto px-4 sm:px-6 pb-16">
         {spec ? (
           <WireframeRenderer spec={spec} isStreaming={isGenerating} />
         ) : !isGenerating ? (

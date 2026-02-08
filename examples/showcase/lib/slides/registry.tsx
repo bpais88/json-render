@@ -68,7 +68,7 @@ const componentRenderers: Record<
         <div
           className={`slide ${bg} w-full h-full flex items-center justify-center px-[8%] py-[6%]`}
         >
-          <div className="grid grid-cols-2 gap-[4%] w-full h-full">
+          <div className="flex flex-col sm:grid sm:grid-cols-2 gap-[4%] w-full h-full">
             <div className="flex flex-col justify-center gap-[2cqi]">
               {left}
             </div>
@@ -198,15 +198,15 @@ const componentRenderers: Record<
     const ratio = (element.props.ratio as string) ?? "equal";
     const children = renderChildren(element, ctx);
     const gridClass: Record<string, string> = {
-      equal: "grid-cols-2",
-      "wide-left": "grid-cols-[2fr_1fr]",
-      "wide-right": "grid-cols-[1fr_2fr]",
+      equal: "sm:grid-cols-2",
+      "wide-left": "sm:grid-cols-[2fr_1fr]",
+      "wide-right": "sm:grid-cols-[1fr_2fr]",
     };
     const left = children[0] ?? null;
     const right = children[1] ?? null;
     return (
       <div
-        className={`grid ${gridClass[ratio] ?? "grid-cols-2"} gap-[3cqi] w-full`}
+        className={`flex flex-col sm:grid ${gridClass[ratio] ?? "sm:grid-cols-2"} gap-[3cqi] w-full`}
       >
         <div className="flex flex-col gap-[1cqi]">{left}</div>
         <div className="flex flex-col gap-[1cqi]">{right}</div>

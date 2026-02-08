@@ -108,8 +108,8 @@ export default function PixelPage() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white">
-      <header className="max-w-4xl mx-auto px-6 pt-12 pb-8 text-center">
-        <h1 className="text-5xl font-black uppercase tracking-tight mb-3">
+      <header className="max-w-4xl mx-auto px-4 sm:px-6 pt-12 pb-8 text-center">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight mb-3">
           Pixel Art
         </h1>
         <p className="text-neutral-400 text-sm max-w-lg mx-auto">
@@ -117,7 +117,7 @@ export default function PixelPage() {
         </p>
       </header>
 
-      <div className="max-w-3xl mx-auto px-6 mb-8">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 mb-8">
         <form onSubmit={handleSubmit} className="mb-3">
           <div className="border border-border rounded bg-transparent p-3 font-mono text-sm flex items-center gap-2">
             <span className="text-neutral-500">&gt;</span>
@@ -139,7 +139,7 @@ export default function PixelPage() {
               <button
                 type="submit"
                 disabled={!prompt.trim()}
-                className="w-7 h-7 rounded-full bg-emerald-500 text-white flex items-center justify-center hover:bg-emerald-400 transition-colors disabled:opacity-30"
+                className="w-11 h-11 sm:w-8 sm:h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center hover:bg-emerald-400 transition-colors disabled:opacity-30"
               >
                 <svg
                   width="14"
@@ -162,7 +162,7 @@ export default function PixelPage() {
               key={ex.label}
               onClick={() => generate(ex.prompt)}
               disabled={isGenerating}
-              className="text-xs px-3 py-1.5 rounded-full border border-neutral-700 text-neutral-400 hover:text-white hover:border-neutral-500 hover:bg-neutral-800 transition-colors disabled:opacity-30 font-medium"
+              className="text-sm sm:text-xs px-4 py-2.5 sm:px-3 sm:py-1.5 rounded-full border border-neutral-700 text-neutral-400 hover:text-white hover:border-neutral-500 hover:bg-neutral-800 transition-colors disabled:opacity-30 font-medium"
             >
               {ex.label}
             </button>
@@ -176,7 +176,7 @@ export default function PixelPage() {
         )}
       </div>
 
-      <main className="max-w-4xl mx-auto px-6 pb-16">
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 pb-16">
         {spec ? (
           <PixelRenderer spec={spec} isStreaming={isGenerating} />
         ) : !isGenerating ? (

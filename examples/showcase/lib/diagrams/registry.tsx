@@ -68,9 +68,9 @@ function ProcessNodeComponent({ data }: NodeProps<Node<NodeData>>) {
         className="!bg-slate-500 !w-2 !h-2 !border-0"
       />
       <div
-        className={`px-4 py-3 rounded-lg border-2 ${palette.bg} ${palette.border} min-w-[140px] max-w-[220px]`}
+        className={`px-3 sm:px-4 py-2 sm:py-3 rounded-lg border-2 ${palette.bg} ${palette.border} min-w-[100px] sm:min-w-[140px] max-w-[160px] sm:max-w-[220px]`}
       >
-        <div className={`text-sm font-semibold ${palette.text}`}>
+        <div className={`text-xs sm:text-sm font-semibold ${palette.text}`}>
           {data.label}
         </div>
         {data.description && (
@@ -96,7 +96,7 @@ function DecisionNodeComponent({ data }: NodeProps<Node<NodeData>>) {
         position={Position.Top}
         className="!bg-amber-500 !w-2 !h-2 !border-0"
       />
-      <div className="relative w-[160px] h-[90px] flex items-center justify-center">
+      <div className="relative w-[120px] sm:w-[160px] h-[70px] sm:h-[90px] flex items-center justify-center">
         {/* Diamond shape */}
         <div
           className="absolute inset-0 bg-amber-950 border-2 border-amber-500"
@@ -113,7 +113,7 @@ function DecisionNodeComponent({ data }: NodeProps<Node<NodeData>>) {
           }}
         />
         <div className="relative z-10 text-center px-2">
-          <div className="text-sm font-semibold text-amber-100">
+          <div className="text-xs sm:text-sm font-semibold text-amber-100">
             {data.label}
           </div>
           {data.description && (
@@ -247,10 +247,10 @@ const nodeTypes = {
 // Auto-Layout with Dagre
 // =============================================================================
 
-const NODE_WIDTH = 180;
-const NODE_HEIGHT = 80;
-const DECISION_WIDTH = 160;
-const DECISION_HEIGHT = 90;
+const NODE_WIDTH = 160;
+const NODE_HEIGHT = 70;
+const DECISION_WIDTH = 140;
+const DECISION_HEIGHT = 80;
 
 function autoLayout(
   nodes: Node[],
@@ -263,10 +263,10 @@ function autoLayout(
   const isHorizontal = direction === "LR" || direction === "RL";
   g.setGraph({
     rankdir: direction,
-    nodesep: 60,
-    ranksep: 80,
-    marginx: 40,
-    marginy: 40,
+    nodesep: 40,
+    ranksep: 60,
+    marginx: 20,
+    marginy: 20,
   });
 
   for (const node of nodes) {

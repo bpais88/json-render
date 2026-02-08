@@ -114,9 +114,9 @@ export default function ComicPage() {
 
   return (
     <div className="min-h-screen comic-theme">
-      <header className="max-w-4xl mx-auto px-6 pt-12 pb-8 text-center">
+      <header className="max-w-4xl mx-auto px-4 sm:px-6 pt-12 pb-8 text-center">
         <h1
-          className="text-5xl font-black uppercase tracking-tight mb-3"
+          className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight mb-3"
           style={{ textShadow: "3px 3px 0 oklch(0.2 0.01 260 / 0.1)" }}
         >
           Comic Strip
@@ -127,7 +127,7 @@ export default function ComicPage() {
         </p>
       </header>
 
-      <div className="max-w-3xl mx-auto px-6 mb-8">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 mb-8">
         <form onSubmit={handleSubmit} className="mb-3">
           <div className="border-3 border-foreground rounded bg-white p-3 font-mono text-sm flex items-center gap-2 shadow-[3px_3px_0_oklch(0.2_0.01_260/0.15)]">
             <span className="text-muted-foreground">&gt;</span>
@@ -149,7 +149,7 @@ export default function ComicPage() {
               <button
                 type="submit"
                 disabled={!prompt.trim()}
-                className="w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center hover:bg-primary/90 transition-colors disabled:opacity-30"
+                className="w-11 h-11 sm:w-8 sm:h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center hover:bg-primary/90 transition-colors disabled:opacity-30"
               >
                 <svg
                   width="14"
@@ -172,7 +172,7 @@ export default function ComicPage() {
               key={ex.label}
               onClick={() => generate(ex.prompt)}
               disabled={isGenerating}
-              className="text-xs px-3 py-1.5 rounded-full border-2 border-foreground/20 text-muted-foreground hover:text-foreground hover:border-foreground/50 hover:bg-white transition-colors disabled:opacity-30 font-medium"
+              className="text-sm sm:text-xs px-4 py-2.5 sm:px-3 sm:py-1.5 rounded-full border-2 border-foreground/20 text-muted-foreground hover:text-foreground hover:border-foreground/50 hover:bg-white transition-colors disabled:opacity-30 font-medium"
             >
               {ex.label}
             </button>
@@ -186,7 +186,7 @@ export default function ComicPage() {
         )}
       </div>
 
-      <main className="max-w-4xl mx-auto px-6 pb-16">
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 pb-16">
         {spec ? (
           <ComicRenderer spec={spec} isStreaming={isGenerating} />
         ) : !isGenerating ? (
