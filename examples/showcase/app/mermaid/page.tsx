@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { createSpecStreamCompiler } from "@json-render/core";
 import type { Spec } from "@json-render/react";
 import { MermaidRenderer } from "@/lib/mermaid/registry";
@@ -44,12 +44,23 @@ export default function MermaidPage() {
   const [spec, setSpec] = useState<Spec | null>(null);
   const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const abortRef = useRef<AbortController | null>(null);
+
+  useEffect(() => {
+    return () => {
+      abortRef.current?.abort();
+    };
+  }, []);
 
   const generate = useCallback(
     async (text?: string) => {
       const p = text || prompt;
       if (!p.trim() || isGenerating) return;
       if (text) setPrompt(text);
+
+      abortRef.current?.abort();
+      const controller = new AbortController();
+      abortRef.current = controller;
 
       setIsGenerating(true);
       setError(null);
@@ -60,6 +71,7 @@ export default function MermaidPage() {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ prompt: p }),
+          signal: controller.signal,
         });
 
         if (!response.ok) throw new Error("Generation failed");
@@ -79,7 +91,9 @@ export default function MermaidPage() {
 
         setSpec(compiler.getResult());
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Generation failed");
+        if ((err as Error).name !== "AbortError") {
+          setError(err instanceof Error ? err.message : "Generation failed");
+        }
       } finally {
         setIsGenerating(false);
       }

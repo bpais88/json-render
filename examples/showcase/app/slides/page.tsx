@@ -144,6 +144,7 @@ export default function SlidesPage() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const abortRef = useRef<AbortController | null>(null);
 
   const totalSlides = spec ? getSlideKeys(spec).length : 0;
 
@@ -176,11 +177,22 @@ export default function SlidesPage() {
     }
   }, [isGenerating, totalSlides]);
 
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      abortRef.current?.abort();
+    };
+  }, []);
+
   const generate = useCallback(
     async (text?: string) => {
       const p = text || prompt;
       if (!p.trim() || isGenerating) return;
       if (text) setPrompt(text);
+
+      abortRef.current?.abort();
+      const controller = new AbortController();
+      abortRef.current = controller;
 
       setIsGenerating(true);
       setError(null);
@@ -192,6 +204,7 @@ export default function SlidesPage() {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ prompt: p }),
+          signal: controller.signal,
         });
 
         if (!response.ok) throw new Error("Generation failed");
@@ -218,7 +231,9 @@ export default function SlidesPage() {
         setSpec(finalSpec);
         setCurrentSlide(0);
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Generation failed");
+        if ((err as Error).name !== "AbortError") {
+          setError(err instanceof Error ? err.message : "Generation failed");
+        }
       } finally {
         setIsGenerating(false);
       }

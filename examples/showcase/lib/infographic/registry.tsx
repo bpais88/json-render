@@ -37,12 +37,6 @@ const listIconMap: Record<string, string> = {
 };
 
 // =============================================================================
-// Shared Context
-// =============================================================================
-
-let currentTheme: { primary: string; lighter: string } = themeColors.blue;
-
-// =============================================================================
 // Component Renderers
 // =============================================================================
 
@@ -54,6 +48,7 @@ interface ElementData {
 
 interface RenderContext {
   spec: Spec;
+  theme: { primary: string; lighter: string };
   renderElement: (key: string) => ReactNode;
 }
 
@@ -69,9 +64,7 @@ const componentRenderers: Record<
   Infographic: (element, ctx) => {
     const title = element.props.title as string;
     const subtitle = element.props.subtitle as string | null;
-    const theme = (element.props.theme as string) ?? "blue";
-    const colors = themeColors[theme] ?? themeColors.blue;
-    currentTheme = colors;
+    const colors = ctx.theme;
     const children = renderChildren(element, ctx);
 
     return (
@@ -132,7 +125,7 @@ const componentRenderers: Record<
     );
   },
 
-  StatCard: (element) => {
+  StatCard: (element, ctx) => {
     const value = element.props.value as string;
     const label = element.props.label as string;
     const icon = element.props.icon as string | null;
@@ -157,7 +150,7 @@ const componentRenderers: Record<
           style={{
             fontSize: "28px",
             fontWeight: 800,
-            color: currentTheme.primary,
+            color: ctx.theme.primary,
             lineHeight: 1.2,
           }}
         >
@@ -210,10 +203,10 @@ const componentRenderers: Record<
     );
   },
 
-  Bar: (element) => {
+  Bar: (element, ctx) => {
     const label = element.props.label as string;
     const value = (element.props.value as number) ?? 0;
-    const color = (element.props.color as string) ?? currentTheme.primary;
+    const color = (element.props.color as string) ?? ctx.theme.primary;
     const clampedValue = Math.max(0, Math.min(100, value));
 
     return (
@@ -312,7 +305,7 @@ const componentRenderers: Record<
     );
   },
 
-  TimelineEvent: (element) => {
+  TimelineEvent: (element, ctx) => {
     const date = element.props.date as string;
     const title = element.props.title as string;
     const description = element.props.description as string | null;
@@ -332,7 +325,7 @@ const componentRenderers: Record<
             width: "12px",
             height: "12px",
             borderRadius: "50%",
-            background: currentTheme.primary,
+            background: ctx.theme.primary,
             border: "2px solid #1a1a1a",
           }}
         />
@@ -341,8 +334,8 @@ const componentRenderers: Record<
             display: "inline-block",
             fontSize: "10px",
             fontWeight: 600,
-            color: currentTheme.primary,
-            background: `${currentTheme.primary}1a`,
+            color: ctx.theme.primary,
+            background: `${ctx.theme.primary}1a`,
             padding: "2px 8px",
             borderRadius: "4px",
             marginBottom: "4px",
@@ -377,7 +370,7 @@ const componentRenderers: Record<
     );
   },
 
-  SectionHeader: (element) => {
+  SectionHeader: (element, ctx) => {
     const title = element.props.title as string;
     const subtitle = element.props.subtitle as string | null;
 
@@ -386,7 +379,7 @@ const componentRenderers: Record<
         <div
           style={{
             height: "1px",
-            background: `linear-gradient(to right, ${currentTheme.primary}, transparent)`,
+            background: `linear-gradient(to right, ${ctx.theme.primary}, transparent)`,
             marginBottom: "12px",
           }}
         />
@@ -414,15 +407,14 @@ const componentRenderers: Record<
     );
   },
 
-  Callout: (element) => {
+  Callout: (element, ctx) => {
     const text = element.props.text as string;
     const source = element.props.source as string | null;
     const variant = (element.props.variant as string) ?? "highlight";
 
-    const borderColor =
-      variant === "warning" ? "#f59e0b" : currentTheme.primary;
+    const borderColor = variant === "warning" ? "#f59e0b" : ctx.theme.primary;
     const bgColor =
-      variant === "warning" ? "#f59e0b1a" : `${currentTheme.primary}1a`;
+      variant === "warning" ? "#f59e0b1a" : `${ctx.theme.primary}1a`;
 
     return (
       <div
@@ -458,7 +450,7 @@ const componentRenderers: Record<
     );
   },
 
-  ComparisonRow: (element) => {
+  ComparisonRow: (element, ctx) => {
     const leftLabel = element.props.leftLabel as string;
     const rightLabel = element.props.rightLabel as string;
     const leftValue = element.props.leftValue as string;
@@ -467,16 +459,16 @@ const componentRenderers: Record<
 
     const leftBorder =
       winner === "left"
-        ? `2px solid ${currentTheme.primary}`
+        ? `2px solid ${ctx.theme.primary}`
         : "1px solid #2a2a2a";
     const rightBorder =
       winner === "right"
-        ? `2px solid ${currentTheme.primary}`
+        ? `2px solid ${ctx.theme.primary}`
         : "1px solid #2a2a2a";
     const leftShadow =
-      winner === "left" ? `0 0 12px ${currentTheme.primary}40` : "none";
+      winner === "left" ? `0 0 12px ${ctx.theme.primary}40` : "none";
     const rightShadow =
-      winner === "right" ? `0 0 12px ${currentTheme.primary}40` : "none";
+      winner === "right" ? `0 0 12px ${ctx.theme.primary}40` : "none";
 
     return (
       <div style={{ display: "flex", gap: "12px", alignItems: "stretch" }}>
@@ -495,7 +487,7 @@ const componentRenderers: Record<
             style={{
               fontSize: "24px",
               fontWeight: 800,
-              color: winner === "left" ? currentTheme.primary : "#e5e7eb",
+              color: winner === "left" ? ctx.theme.primary : "#e5e7eb",
             }}
           >
             {leftValue}
@@ -538,7 +530,7 @@ const componentRenderers: Record<
             style={{
               fontSize: "24px",
               fontWeight: 800,
-              color: winner === "right" ? currentTheme.primary : "#e5e7eb",
+              color: winner === "right" ? ctx.theme.primary : "#e5e7eb",
             }}
           >
             {rightValue}
@@ -578,7 +570,7 @@ const componentRenderers: Record<
     );
   },
 
-  IconListItem: (element) => {
+  IconListItem: (element, ctx) => {
     const icon = element.props.icon as string;
     const text = element.props.text as string;
     const bold = element.props.bold as boolean | null;
@@ -593,7 +585,7 @@ const componentRenderers: Record<
             ? "#f59e0b"
             : icon === "star"
               ? "#eab308"
-              : currentTheme.primary;
+              : ctx.theme.primary;
 
     return (
       <div style={{ display: "flex", alignItems: "flex-start", gap: "10px" }}>
@@ -629,12 +621,23 @@ const componentRenderers: Record<
 // Render Engine
 // =============================================================================
 
+function resolveTheme(spec: Spec): { primary: string; lighter: string } {
+  const rootEl = spec.root ? spec.elements[spec.root] : null;
+  if (rootEl?.type === "Infographic") {
+    const theme = (rootEl.props as Record<string, unknown>).theme as string;
+    return themeColors[theme] ?? themeColors.blue;
+  }
+  return themeColors.blue;
+}
+
 function RenderElement({
   spec,
   elementKey,
+  theme,
 }: {
   spec: Spec;
   elementKey: string;
+  theme: { primary: string; lighter: string };
 }) {
   const element = spec.elements[elementKey];
   if (!element) return null;
@@ -647,8 +650,14 @@ function RenderElement({
 
   const ctx: RenderContext = {
     spec,
+    theme,
     renderElement: (childKey: string) => (
-      <RenderElement key={childKey} spec={spec} elementKey={childKey} />
+      <RenderElement
+        key={childKey}
+        spec={spec}
+        elementKey={childKey}
+        theme={theme}
+      />
     ),
   };
 
@@ -752,9 +761,11 @@ export function InfographicRenderer({
     return null;
   }
 
+  const theme = resolveTheme(spec);
+
   return (
     <div style={{ opacity: isStreaming ? 0.8 : 1 }}>
-      <RenderElement spec={spec} elementKey={spec.root} />
+      <RenderElement spec={spec} elementKey={spec.root} theme={theme} />
     </div>
   );
 }

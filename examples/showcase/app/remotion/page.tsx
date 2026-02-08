@@ -167,9 +167,20 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const playerRef = useRef<PlayerRef>(null);
+  const abortRef = useRef<AbortController | null>(null);
+
+  useEffect(() => {
+    return () => {
+      abortRef.current?.abort();
+    };
+  }, []);
 
   const generate = useCallback(async () => {
     if (!prompt.trim() || isGenerating) return;
+
+    abortRef.current?.abort();
+    const controller = new AbortController();
+    abortRef.current = controller;
 
     setIsGenerating(true);
     setError(null);
@@ -180,6 +191,7 @@ export default function Home() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt }),
+        signal: controller.signal,
       });
 
       if (!response.ok) {
@@ -218,7 +230,9 @@ export default function Home() {
         setError("Generated timeline is incomplete");
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Generation failed");
+      if ((err as Error).name !== "AbortError") {
+        setError(err instanceof Error ? err.message : "Generation failed");
+      }
     } finally {
       setIsGenerating(false);
     }
