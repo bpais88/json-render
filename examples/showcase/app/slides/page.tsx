@@ -204,7 +204,10 @@ export default function SlidesPage() {
   // Sync when user exits fullscreen via browser UI (e.g. Escape on desktop)
   useEffect(() => {
     const handler = () => {
-      if (!document.fullscreenElement) setIsFullscreen(false);
+      if (!document.fullscreenElement) {
+        setIsFullscreen(false);
+        if (uiTimeoutRef.current) clearTimeout(uiTimeoutRef.current);
+      }
     };
     document.addEventListener("fullscreenchange", handler);
     return () => document.removeEventListener("fullscreenchange", handler);
@@ -221,6 +224,7 @@ export default function SlidesPage() {
   useEffect(() => {
     return () => {
       abortRef.current?.abort();
+      if (uiTimeoutRef.current) clearTimeout(uiTimeoutRef.current);
     };
   }, []);
 
