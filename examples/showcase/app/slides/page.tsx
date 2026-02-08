@@ -1,6 +1,13 @@
 "use client";
 
-import { useState, useCallback, useRef, useEffect } from "react";
+import {
+  useState,
+  useCallback,
+  useRef,
+  useEffect,
+  type MouseEvent,
+  type TouchEvent,
+} from "react";
 import { createSpecStreamCompiler } from "@json-render/core";
 import type { Spec } from "@json-render/react";
 import { SlidePresenter, getSlideKeys } from "@/lib/slides/registry";
@@ -143,10 +150,33 @@ export default function SlidesPage() {
   const [error, setError] = useState<string | null>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [showUI, setShowUI] = useState(true);
   const inputRef = useRef<HTMLInputElement>(null);
   const abortRef = useRef<AbortController | null>(null);
+  const touchStartX = useRef<number | null>(null);
+  const fullscreenRef = useRef<HTMLDivElement>(null);
+  const uiTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const totalSlides = spec ? getSlideKeys(spec).length : 0;
+
+  // Enter/exit browser fullscreen API
+  const enterFullscreen = useCallback(() => {
+    setIsFullscreen(true);
+    setShowUI(true);
+    // Auto-hide UI after 3 seconds
+    uiTimeoutRef.current = setTimeout(() => setShowUI(false), 3000);
+    document.documentElement.requestFullscreen?.().catch(() => {
+      // Fullscreen API not supported or denied — still show our fullscreen overlay
+    });
+  }, []);
+
+  const exitFullscreen = useCallback(() => {
+    setIsFullscreen(false);
+    if (document.fullscreenElement) {
+      document.exitFullscreen?.().catch(() => {});
+    }
+    if (uiTimeoutRef.current) clearTimeout(uiTimeoutRef.current);
+  }, []);
 
   // Keyboard navigation
   useEffect(() => {
@@ -158,17 +188,30 @@ export default function SlidesPage() {
         e.preventDefault();
         setCurrentSlide((prev) => Math.max(prev - 1, 0));
       } else if (e.key === "Escape") {
-        setIsFullscreen(false);
+        exitFullscreen();
       } else if (e.key === "f" && !e.metaKey && !e.ctrlKey) {
         // Only toggle fullscreen if not typing in an input
         if (document.activeElement?.tagName !== "INPUT") {
-          setIsFullscreen((prev) => !prev);
+          if (isFullscreen) exitFullscreen();
+          else enterFullscreen();
         }
       }
     };
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, [totalSlides]);
+  }, [totalSlides, isFullscreen, enterFullscreen, exitFullscreen]);
+
+  // Sync when user exits fullscreen via browser UI (e.g. Escape on desktop)
+  useEffect(() => {
+    const handler = () => {
+      if (!document.fullscreenElement) {
+        setIsFullscreen(false);
+        if (uiTimeoutRef.current) clearTimeout(uiTimeoutRef.current);
+      }
+    };
+    document.addEventListener("fullscreenchange", handler);
+    return () => document.removeEventListener("fullscreenchange", handler);
+  }, []);
 
   // Auto-advance to latest slide during streaming
   useEffect(() => {
@@ -181,6 +224,7 @@ export default function SlidesPage() {
   useEffect(() => {
     return () => {
       abortRef.current?.abort();
+      if (uiTimeoutRef.current) clearTimeout(uiTimeoutRef.current);
     };
   }, []);
 
@@ -259,15 +303,94 @@ export default function SlidesPage() {
     URL.revokeObjectURL(url);
   }, [spec]);
 
+  // Fullscreen touch handlers
+  const handleFullscreenTap = useCallback(
+    (e: MouseEvent<HTMLDivElement>) => {
+      // Ignore if the close button was clicked
+      if ((e.target as HTMLElement).closest("[data-close-btn]")) return;
+      const rect = e.currentTarget.getBoundingClientRect();
+      const relX = (e.clientX - rect.left) / rect.width;
+
+      if (relX < 0.3) {
+        setCurrentSlide((prev) => Math.max(prev - 1, 0));
+      } else if (relX > 0.7) {
+        setCurrentSlide((prev) => Math.min(prev + 1, totalSlides - 1));
+      } else {
+        // Center tap — toggle UI
+        setShowUI((prev) => {
+          const next = !prev;
+          if (uiTimeoutRef.current) clearTimeout(uiTimeoutRef.current);
+          if (next) {
+            uiTimeoutRef.current = setTimeout(() => setShowUI(false), 3000);
+          }
+          return next;
+        });
+      }
+    },
+    [totalSlides],
+  );
+
+  const handleTouchStart = useCallback((e: TouchEvent<HTMLDivElement>) => {
+    touchStartX.current = e.touches[0].clientX;
+  }, []);
+
+  const handleTouchEnd = useCallback(
+    (e: TouchEvent<HTMLDivElement>) => {
+      if (touchStartX.current === null) return;
+      const dx = e.changedTouches[0].clientX - touchStartX.current;
+      touchStartX.current = null;
+
+      if (Math.abs(dx) < 50) return; // threshold
+      if (dx < 0) {
+        // Swipe left → next
+        setCurrentSlide((prev) => Math.min(prev + 1, totalSlides - 1));
+      } else {
+        // Swipe right → previous
+        setCurrentSlide((prev) => Math.max(prev - 1, 0));
+      }
+    },
+    [totalSlides],
+  );
+
   // Fullscreen mode
   if (isFullscreen && spec) {
     return (
       <div
-        className="fullscreen-mode cursor-none slides-theme"
-        onClick={() => setIsFullscreen(false)}
+        ref={fullscreenRef}
+        className="fullscreen-mode sm:cursor-none slides-theme"
+        onClick={handleFullscreenTap}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
       >
         <SlidePresenter spec={spec} currentSlide={currentSlide} />
-        <div className="fixed bottom-4 right-4 text-white/20 text-sm font-mono">
+
+        {/* Close button */}
+        <button
+          data-close-btn
+          onClick={exitFullscreen}
+          className={`fixed top-4 right-4 z-50 w-10 h-10 flex items-center justify-center rounded-full bg-black/50 text-white/70 hover:text-white hover:bg-black/70 transition-all ${
+            showUI ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
+          aria-label="Exit fullscreen"
+        >
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
+
+        {/* Slide counter */}
+        <div
+          className={`fixed bottom-4 left-1/2 -translate-x-1/2 text-white/40 text-sm font-mono transition-opacity ${
+            showUI ? "opacity-100" : "opacity-0"
+          }`}
+        >
           {currentSlide + 1} / {totalSlides}
         </div>
       </div>
@@ -278,7 +401,7 @@ export default function SlidesPage() {
     <div className="min-h-screen slides-theme">
       {/* Hero */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-20 pb-12 text-center">
-        <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tighter mb-6">
+        <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter mb-6">
           Slide Deck
         </h1>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
@@ -372,15 +495,15 @@ export default function SlidesPage() {
                       {currentSlide + 1} / {totalSlides}
                     </span>
                     <button
-                      onClick={() => setIsFullscreen(true)}
-                      className="text-xs px-2 py-1 rounded border border-border text-muted-foreground hover:text-foreground hover:border-foreground/50 transition-colors"
+                      onClick={enterFullscreen}
+                      className="text-sm sm:text-xs px-3 py-2 sm:px-2 sm:py-1 rounded border border-border text-muted-foreground hover:text-foreground hover:border-foreground/50 transition-colors"
                       title="Present (F)"
                     >
                       Present
                     </button>
                     <button
                       onClick={handleExport}
-                      className="text-xs px-2 py-1 rounded border border-border text-muted-foreground hover:text-foreground hover:border-foreground/50 transition-colors"
+                      className="text-sm sm:text-xs px-3 py-2 sm:px-2 sm:py-1 rounded border border-border text-muted-foreground hover:text-foreground hover:border-foreground/50 transition-colors"
                       title="Export JSON"
                     >
                       Export
@@ -446,9 +569,9 @@ export default function SlidesPage() {
                     <button
                       key={i}
                       onClick={() => setCurrentSlide(i)}
-                      className={`w-2 h-2 rounded-full transition-all ${
+                      className={`w-3 h-3 sm:w-2 sm:h-2 rounded-full transition-all ${
                         i === currentSlide
-                          ? "bg-white w-4"
+                          ? "bg-white w-5 sm:w-4"
                           : i <= (isGenerating ? totalSlides : currentSlide)
                             ? "bg-white/40 hover:bg-white/60"
                             : "bg-white/20"
@@ -480,9 +603,9 @@ export default function SlidesPage() {
               </div>
             )}
 
-            {/* Keyboard hints */}
+            {/* Keyboard hints (desktop only) */}
             {totalSlides > 0 && (
-              <div className="flex justify-center gap-4 mt-2">
+              <div className="hidden sm:flex justify-center gap-4 mt-2">
                 <span className="text-xs text-muted-foreground/50">
                   <kbd className="px-1.5 py-0.5 rounded border border-border text-[10px]">
                     &larr;

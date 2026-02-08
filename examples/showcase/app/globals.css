@@ -449,12 +449,23 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .slides-theme .fullscreen-mode .slide {
   width: 100vw;
   height: 100vh;
   aspect-ratio: auto;
+}
+
+/* Landscape-specific: maximise slide area */
+@media (orientation: landscape) and (max-height: 500px) {
+  .slides-theme .fullscreen-mode .slide {
+    width: 100vw;
+    height: 100vh;
+  }
 }
 
 /* =============================================================================
