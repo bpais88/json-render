@@ -107,7 +107,7 @@ export default function WireframePage() {
         <h1 className="text-4xl font-black tracking-tight mb-3 font-mono">
           Wireframes
         </h1>
-        <p className="text-gray-500 text-sm max-w-lg mx-auto font-mono">
+        <p className="text-gray-700 text-sm max-w-lg mx-auto font-mono">
           Describe a UI. AI generates low-fidelity wireframe mockups.
         </p>
       </header>
@@ -121,14 +121,14 @@ export default function WireframePage() {
           className="mb-3"
         >
           <div className="border-2 border-dashed border-gray-400 rounded bg-white p-3 font-mono text-sm flex items-center gap-2 shadow-[3px_3px_0_#e5e7eb]">
-            <span className="text-gray-400">&gt;</span>
+            <span className="text-gray-500">&gt;</span>
             <input
               ref={inputRef}
               type="text"
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
               placeholder="Describe the UI you want to wireframe..."
-              className="flex-1 bg-transparent outline-none placeholder:text-gray-300 font-mono"
+              className="flex-1 bg-transparent outline-none placeholder:text-gray-500 font-mono"
               disabled={isGenerating}
               maxLength={1000}
             />
@@ -154,7 +154,7 @@ export default function WireframePage() {
               key={ex.label}
               onClick={() => generate(ex.prompt)}
               disabled={isGenerating}
-              className="text-xs px-3 py-1.5 rounded border border-dashed border-gray-300 text-gray-500 hover:text-gray-700 hover:border-gray-500 hover:bg-white transition-colors disabled:opacity-30 font-mono"
+              className="text-xs px-3 py-1.5 rounded border border-dashed border-gray-400 text-gray-700 hover:text-gray-900 hover:border-gray-600 hover:bg-white transition-colors disabled:opacity-30 font-mono"
             >
               {ex.label}
             </button>
@@ -172,7 +172,7 @@ export default function WireframePage() {
         {spec ? (
           <WireframeRenderer spec={spec} isStreaming={isGenerating} />
         ) : !isGenerating ? (
-          <div className="text-center py-20 text-gray-300">
+          <div className="text-center py-20 text-gray-500">
             <p className="text-sm font-mono">
               Your wireframes will appear here
             </p>

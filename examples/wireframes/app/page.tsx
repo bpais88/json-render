@@ -102,13 +102,13 @@ export default function WireframePage() {
     <div className="min-h-screen">
       {/* Header */}
       <header className="max-w-4xl mx-auto px-6 pt-12 pb-8 text-center">
-        <div className="text-xs font-mono text-gray-400 mb-3">
+        <div className="text-xs font-mono text-gray-600 mb-3">
           @json-render/wireframes
         </div>
         <h1 className="text-4xl font-black tracking-tight mb-3 font-mono">
           AI &rarr; json-render &rarr; Wireframe
         </h1>
-        <p className="text-gray-500 text-sm max-w-lg mx-auto font-mono">
+        <p className="text-gray-700 text-sm max-w-lg mx-auto font-mono">
           Describe a UI. AI generates low-fidelity wireframe mockups with forms,
           tables, navigation, and more.
         </p>
@@ -118,14 +118,14 @@ export default function WireframePage() {
       <div className="max-w-3xl mx-auto px-6 mb-8">
         <form onSubmit={handleSubmit} className="mb-3">
           <div className="border-2 border-dashed border-gray-400 rounded bg-white p-3 font-mono text-sm flex items-center gap-2 shadow-[3px_3px_0_#e5e7eb]">
-            <span className="text-gray-400">&gt;</span>
+            <span className="text-gray-500">&gt;</span>
             <input
               ref={inputRef}
               type="text"
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
               placeholder="Describe the UI you want to wireframe..."
-              className="flex-1 bg-transparent outline-none placeholder:text-gray-300 font-mono"
+              className="flex-1 bg-transparent outline-none placeholder:text-gray-500 font-mono"
               disabled={isGenerating}
               maxLength={1000}
             />
@@ -151,7 +151,7 @@ export default function WireframePage() {
               key={ex.label}
               onClick={() => generate(ex.prompt)}
               disabled={isGenerating}
-              className="text-xs px-3 py-1.5 rounded border border-dashed border-gray-300 text-gray-500 hover:text-gray-700 hover:border-gray-500 hover:bg-white transition-colors disabled:opacity-30 font-mono"
+              className="text-xs px-3 py-1.5 rounded border border-dashed border-gray-400 text-gray-700 hover:text-gray-900 hover:border-gray-600 hover:bg-white transition-colors disabled:opacity-30 font-mono"
             >
               {ex.label}
             </button>
@@ -170,7 +170,7 @@ export default function WireframePage() {
         {spec ? (
           <WireframeRenderer spec={spec} isStreaming={isGenerating} />
         ) : !isGenerating ? (
-          <div className="text-center py-20 text-gray-300">
+          <div className="text-center py-20 text-gray-500">
             <div className="text-6xl mb-4" style={{ fontFamily: "serif" }}>
               [ ]
             </div>
@@ -188,7 +188,7 @@ export default function WireframePage() {
 
       {/* Footer */}
       <footer className="border-t border-dashed border-gray-300 py-3 text-center">
-        <span className="text-[10px] text-gray-300 font-mono">
+        <span className="text-[10px] text-gray-500 font-mono">
           json-render / wireframes
         </span>
       </footer>

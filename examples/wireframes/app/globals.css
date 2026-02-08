@@ -97,7 +97,7 @@ body {
   padding: 6px 8px;
   font-size: 12px;
   font-family: var(--font-mono);
-  color: #6b7280;
+  color: #374151;
   border-radius: 3px;
   cursor: pointer;
   display: flex;
@@ -164,7 +164,7 @@ body {
 
 .wf-btn-ghost {
   background: transparent;
-  color: #6b7280;
+  color: #374151;
   border-color: transparent;
   text-decoration: underline;
   text-decoration-style: dashed;
@@ -197,7 +197,7 @@ body {
   font-size: 11px;
   font-family: var(--font-mono);
   font-weight: 700;
-  color: #6b7280;
+  color: #374151;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   border-bottom: 2px dashed #d1d5db;

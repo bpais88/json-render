@@ -45,7 +45,7 @@ const btnSize: Record<string, string> = {
 };
 
 const badgeVariant: Record<string, string> = {
-  default: "bg-gray-200 text-gray-600",
+  default: "bg-gray-200 text-gray-800",
   success: "bg-green-100 text-green-700 border-green-300",
   warning: "bg-amber-100 text-amber-700 border-amber-300",
   error: "bg-red-100 text-red-700 border-red-300",
@@ -128,7 +128,7 @@ const componentRenderers: Record<
           <h2 className="text-2xl font-bold font-mono tracking-tight">
             {title}
           </h2>
-          <div className="text-xs text-gray-400 font-mono mt-1">
+          <div className="text-xs text-gray-600 font-mono mt-1">
             {device} &middot; wireframe
           </div>
         </div>
@@ -154,7 +154,7 @@ const componentRenderers: Record<
             <span className="font-mono text-sm font-bold">{name}</span>
           </div>
           {description && (
-            <span className="text-[10px] text-gray-400 font-mono">
+            <span className="text-[10px] text-gray-600 font-mono">
               {description}
             </span>
           )}
@@ -195,7 +195,7 @@ const componentRenderers: Record<
           {items.map((item, i) => (
             <span
               key={i}
-              className="text-xs font-mono text-gray-500 hover:text-gray-700 cursor-pointer underline decoration-dashed"
+              className="text-xs font-mono text-gray-700 hover:text-gray-900 cursor-pointer underline decoration-dashed"
             >
               {item}
             </span>
@@ -257,7 +257,7 @@ const componentRenderers: Record<
     }
 
     return (
-      <p className="text-sm font-mono text-gray-600 leading-relaxed">{text}</p>
+      <p className="text-sm font-mono text-gray-800 leading-relaxed">{text}</p>
     );
   },
 
@@ -285,13 +285,13 @@ const componentRenderers: Record<
     return (
       <div className="space-y-1">
         {label && (
-          <label className="text-xs font-mono font-semibold text-gray-600">
+          <label className="text-xs font-mono font-semibold text-gray-800">
             {label}
-            {required && <span className="text-red-400 ml-0.5">*</span>}
+            {required && <span className="text-red-500 ml-0.5">*</span>}
           </label>
         )}
         <div className="wf-input">
-          <span className="text-gray-400">{placeholder}</span>
+          <span className="text-gray-500">{placeholder}</span>
         </div>
       </div>
     );
@@ -305,12 +305,12 @@ const componentRenderers: Record<
     return (
       <div className="space-y-1">
         {label && (
-          <label className="text-xs font-mono font-semibold text-gray-600">
+          <label className="text-xs font-mono font-semibold text-gray-800">
             {label}
           </label>
         )}
         <div className="wf-input" style={{ minHeight: `${rows * 1.5}rem` }}>
-          <span className="text-gray-400">{placeholder}</span>
+          <span className="text-gray-500">{placeholder}</span>
         </div>
       </div>
     );
@@ -323,13 +323,13 @@ const componentRenderers: Record<
     return (
       <div className="space-y-1">
         {label && (
-          <label className="text-xs font-mono font-semibold text-gray-600">
+          <label className="text-xs font-mono font-semibold text-gray-800">
             {label}
           </label>
         )}
         <div className="wf-input flex items-center justify-between">
-          <span className="text-gray-400">{placeholder}</span>
-          <span className="text-gray-400 text-xs">&#9660;</span>
+          <span className="text-gray-500">{placeholder}</span>
+          <span className="text-gray-500 text-xs">&#9660;</span>
         </div>
       </div>
     );
@@ -346,7 +346,7 @@ const componentRenderers: Record<
         >
           {checked && <span className="text-[10px]">&#10003;</span>}
         </div>
-        <span className="text-sm font-mono text-gray-600">{label}</span>
+        <span className="text-sm font-mono text-gray-800">{label}</span>
       </div>
     );
   },
@@ -359,7 +359,7 @@ const componentRenderers: Record<
     return (
       <div className="space-y-1.5">
         {label && (
-          <div className="text-xs font-mono font-semibold text-gray-600">
+          <div className="text-xs font-mono font-semibold text-gray-800">
             {label}
           </div>
         )}
@@ -372,7 +372,7 @@ const componentRenderers: Record<
                 <span className="w-2 h-2 bg-gray-500 rounded-full" />
               )}
             </div>
-            <span className="text-sm font-mono text-gray-600">{opt}</span>
+            <span className="text-sm font-mono text-gray-800">{opt}</span>
           </div>
         ))}
       </div>
@@ -392,7 +392,7 @@ const componentRenderers: Record<
             className={`w-4 h-4 rounded-full bg-gray-500 absolute top-0 transition-all ${enabled ? "left-5" : "left-0"}`}
           />
         </div>
-        <span className="text-sm font-mono text-gray-600">{label}</span>
+        <span className="text-sm font-mono text-gray-800">{label}</span>
       </div>
     );
   },
@@ -403,18 +403,20 @@ const componentRenderers: Record<
     const children = renderChildren(element, ctx);
 
     return (
-      <div className="wf-card">
+      <div className="wf-card h-full flex flex-col">
         {(title || subtitle) && (
           <div className="mb-3">
             {title && (
               <div className="font-mono font-bold text-sm">{title}</div>
             )}
             {subtitle && (
-              <div className="font-mono text-xs text-gray-400">{subtitle}</div>
+              <div className="font-mono text-xs text-gray-600">{subtitle}</div>
             )}
           </div>
         )}
-        <div className="space-y-3">{children}</div>
+        <div className="space-y-3 flex-1 flex flex-col [&>*:last-child]:mt-auto">
+          {children}
+        </div>
       </div>
     );
   },
@@ -464,9 +466,9 @@ const componentRenderers: Record<
         {items.map((item, i) => (
           <div
             key={i}
-            className="flex items-start gap-2 font-mono text-sm text-gray-600"
+            className="flex items-start gap-2 font-mono text-sm text-gray-800"
           >
-            <span className="text-gray-400 shrink-0">
+            <span className="text-gray-600 shrink-0">
               {ordered ? `${i + 1}.` : "\u2022"}
             </span>
             {item}
@@ -509,7 +511,7 @@ const componentRenderers: Record<
           />
         </svg>
         {label && (
-          <span className="relative z-10 text-xs font-mono text-gray-400 bg-white/80 px-2 py-0.5 rounded">
+          <span className="relative z-10 text-xs font-mono text-gray-600 bg-white/80 px-2 py-0.5 rounded">
             {label}
           </span>
         )}
@@ -535,7 +537,7 @@ const componentRenderers: Record<
 
     return (
       <div
-        className={`${sizeClass} rounded-full border-2 border-dashed border-gray-400 bg-gray-100 flex items-center justify-center font-mono font-bold text-gray-500 shrink-0`}
+        className={`${sizeClass} rounded-full border-2 border-dashed border-gray-400 bg-gray-100 flex items-center justify-center font-mono font-bold text-gray-700 shrink-0`}
       >
         {initials}
       </div>
@@ -563,7 +565,7 @@ const componentRenderers: Record<
       return (
         <div className="flex items-center gap-3 my-2">
           <div className="flex-1 border-t border-dashed border-gray-300" />
-          <span className="text-[10px] font-mono text-gray-400">{label}</span>
+          <span className="text-[10px] font-mono text-gray-600">{label}</span>
           <div className="flex-1 border-t border-dashed border-gray-300" />
         </div>
       );
@@ -576,7 +578,7 @@ const componentRenderers: Record<
     const items = (element.props.items as string[]) ?? [];
 
     return (
-      <div className="flex items-center gap-1.5 text-xs font-mono text-gray-400">
+      <div className="flex items-center gap-1.5 text-xs font-mono text-gray-600">
         {items.map((item, i) => (
           <span key={i} className="flex items-center gap-1.5">
             {i > 0 && <span>/</span>}
@@ -607,7 +609,7 @@ const componentRenderers: Record<
             className={`px-4 py-2 text-xs font-mono cursor-pointer ${
               item === active
                 ? "border-b-2 border-gray-700 text-gray-700 font-bold -mb-[2px]"
-                : "text-gray-400"
+                : "text-gray-600"
             }`}
           >
             {item}
@@ -628,7 +630,7 @@ const componentRenderers: Record<
         <div className={`wf-modal ${width}`}>
           <div className="flex items-center justify-between mb-3">
             <span className="font-mono font-bold text-sm">{title}</span>
-            <span className="text-gray-400 cursor-pointer text-lg leading-none">
+            <span className="text-gray-600 cursor-pointer text-lg leading-none">
               &times;
             </span>
           </div>
@@ -646,7 +648,7 @@ const componentRenderers: Record<
     return (
       <div className={`wf-toast ${v}`}>
         <span className="text-xs font-mono">{message}</span>
-        <span className="text-gray-400 text-sm cursor-pointer">&times;</span>
+        <span className="text-gray-600 text-sm cursor-pointer">&times;</span>
       </div>
     );
   },
@@ -662,8 +664,8 @@ const componentRenderers: Record<
       <div className="space-y-1">
         {label && (
           <div className="flex items-center justify-between">
-            <span className="text-xs font-mono text-gray-600">{label}</span>
-            <span className="text-xs font-mono text-gray-400">{percent}%</span>
+            <span className="text-xs font-mono text-gray-800">{label}</span>
+            <span className="text-xs font-mono text-gray-600">{percent}%</span>
           </div>
         )}
         <div className="h-3 bg-gray-100 border border-dashed border-gray-300 rounded-full overflow-hidden">
@@ -780,7 +782,7 @@ export function WireframeRenderer({
               <span className="w-3 h-3 bg-gray-300 rounded-sm animate-pulse [animation-delay:0.1s]" />
               <span className="w-3 h-3 bg-gray-300 rounded-sm animate-pulse [animation-delay:0.2s]" />
             </div>
-            <span className="text-gray-400 text-sm font-mono">
+            <span className="text-gray-600 text-sm font-mono">
               Sketching wireframes...
             </span>
           </div>
