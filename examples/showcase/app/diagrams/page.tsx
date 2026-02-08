@@ -121,9 +121,9 @@ export default function DiagramsPage() {
   };
 
   return (
-    <div className="h-screen flex flex-col diagrams-theme">
+    <div className="h-[100dvh] flex flex-col diagrams-theme">
       {/* Header */}
-      <header className="border-b border-border bg-background/80 backdrop-blur-sm px-6 py-4">
+      <header className="border-b border-border bg-background/80 backdrop-blur-sm px-4 sm:px-6 py-4">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-4">
             <div>
@@ -157,7 +157,7 @@ export default function DiagramsPage() {
                 <button
                   type="submit"
                   disabled={!prompt.trim()}
-                  className="w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center hover:bg-primary/90 transition-colors disabled:opacity-30"
+                  className="w-11 h-11 sm:w-8 sm:h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center hover:bg-primary/90 transition-colors disabled:opacity-30"
                 >
                   <svg
                     width="14"
@@ -181,7 +181,7 @@ export default function DiagramsPage() {
                 key={ex.label}
                 onClick={() => generate(ex.prompt)}
                 disabled={isGenerating}
-                className="text-xs px-3 py-1.5 rounded-full border border-border text-muted-foreground hover:text-foreground hover:border-foreground/50 transition-colors disabled:opacity-30"
+                className="text-sm sm:text-xs px-4 py-2.5 sm:px-3 sm:py-1.5 rounded-full border border-border text-muted-foreground hover:text-foreground hover:border-foreground/50 transition-colors disabled:opacity-30"
               >
                 {ex.label}
               </button>

@@ -514,3 +514,15 @@ body {
   background: oklch(0.145 0 0);
   color: oklch(0.985 0 0);
 }
+
+/* =============================================================================
+   SAFE AREA SUPPORT (notched phones)
+   ============================================================================= */
+
+@supports (padding: max(0px)) {
+  body {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+    padding-bottom: max(0px, env(safe-area-inset-bottom));
+  }
+}

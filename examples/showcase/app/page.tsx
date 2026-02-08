@@ -85,10 +85,10 @@ const examples = [
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white">
-      <div className="max-w-4xl mx-auto px-6 pt-24 pb-16">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-24 pb-16">
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="text-5xl sm:text-6xl font-bold tracking-tighter mb-4">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter mb-4">
             Content Studio
           </h1>
           <p className="text-lg text-white/50 max-w-2xl mx-auto leading-relaxed">

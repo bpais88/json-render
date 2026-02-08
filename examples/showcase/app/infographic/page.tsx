@@ -104,14 +104,16 @@ export default function InfographicPage() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white">
-      <header className="max-w-4xl mx-auto px-6 pt-12 pb-8 text-center">
-        <h1 className="text-5xl font-black tracking-tight mb-3">Infographic</h1>
+      <header className="max-w-4xl mx-auto px-4 sm:px-6 pt-12 pb-8 text-center">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight mb-3">
+          Infographic
+        </h1>
         <p className="text-gray-400 text-sm max-w-lg mx-auto">
           Data-driven visual stories, generated from a single prompt.
         </p>
       </header>
 
-      <div className="max-w-3xl mx-auto px-6 mb-8">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 mb-8">
         <form onSubmit={handleSubmit} className="mb-3">
           <div className="border border-[#2a2a2a] rounded-lg bg-[#111111] p-3 text-sm flex items-center gap-2">
             <span className="text-gray-500">&gt;</span>
@@ -133,7 +135,7 @@ export default function InfographicPage() {
               <button
                 type="submit"
                 disabled={!prompt.trim()}
-                className="w-7 h-7 rounded-full bg-blue-500 text-white flex items-center justify-center hover:bg-blue-400 transition-colors disabled:opacity-30"
+                className="w-11 h-11 sm:w-8 sm:h-8 rounded-full bg-blue-500 text-white flex items-center justify-center hover:bg-blue-400 transition-colors disabled:opacity-30"
               >
                 <svg
                   width="14"
@@ -156,7 +158,7 @@ export default function InfographicPage() {
               key={ex.label}
               onClick={() => generate(ex.prompt)}
               disabled={isGenerating}
-              className="text-xs px-3 py-1.5 rounded-full border border-[#2a2a2a] text-gray-400 hover:text-white hover:border-gray-500 hover:bg-[#1a1a1a] transition-colors disabled:opacity-30 font-medium"
+              className="text-sm sm:text-xs px-4 py-2.5 sm:px-3 sm:py-1.5 rounded-full border border-[#2a2a2a] text-gray-400 hover:text-white hover:border-gray-500 hover:bg-[#1a1a1a] transition-colors disabled:opacity-30 font-medium"
             >
               {ex.label}
             </button>
@@ -170,7 +172,7 @@ export default function InfographicPage() {
         )}
       </div>
 
-      <main className="max-w-4xl mx-auto px-6 pb-16">
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 pb-16">
         {spec ? (
           <InfographicRenderer spec={spec} isStreaming={isGenerating} />
         ) : !isGenerating ? (

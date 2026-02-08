@@ -264,7 +264,7 @@ export default function Home() {
   return (
     <div className="min-h-screen remotion-theme">
       {/* Hero */}
-      <section className="max-w-5xl mx-auto px-6 pt-24 pb-16 text-center">
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 pt-24 pb-16 text-center">
         <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tighter mb-6">
           Video
         </h1>
@@ -293,7 +293,7 @@ export default function Home() {
                 <button
                   type="button"
                   onClick={() => setIsGenerating(false)}
-                  className="w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center hover:bg-primary/90 transition-colors"
+                  className="w-11 h-11 sm:w-8 sm:h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center hover:bg-primary/90 transition-colors"
                 >
                   <svg
                     width="12"
@@ -308,7 +308,7 @@ export default function Home() {
                 <button
                   type="submit"
                   disabled={!prompt.trim()}
-                  className="w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center hover:bg-primary/90 transition-colors disabled:opacity-30"
+                  className="w-11 h-11 sm:w-8 sm:h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center hover:bg-primary/90 transition-colors disabled:opacity-30"
                 >
                   <svg
                     width="14"
@@ -331,7 +331,7 @@ export default function Home() {
               <button
                 key={examplePrompt}
                 onClick={() => handleExampleClick(examplePrompt)}
-                className="text-xs px-3 py-1.5 rounded-full border border-border text-muted-foreground hover:text-foreground hover:border-foreground/50 transition-colors"
+                className="text-sm sm:text-xs px-4 py-2.5 sm:px-3 sm:py-1.5 rounded-full border border-border text-muted-foreground hover:text-foreground hover:border-foreground/50 transition-colors"
               >
                 {examplePrompt}
               </button>
@@ -357,7 +357,7 @@ export default function Home() {
                   </span>
                 )}
               </div>
-              <div className="border border-border rounded bg-background font-mono text-xs h-[28rem] overflow-auto relative group">
+              <div className="border border-border rounded bg-background font-mono text-xs h-[20rem] sm:h-[28rem] overflow-auto relative group">
                 {spec && (
                   <div className="absolute top-2 right-2 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
                     <CopyButton text={JSON.stringify(spec, null, 2)} />
@@ -403,7 +403,7 @@ export default function Home() {
                 </div>
               </div>
               <div
-                className="border border-border rounded bg-black h-[28rem] relative overflow-hidden"
+                className="border border-border rounded bg-black h-[20rem] sm:h-[28rem] relative overflow-hidden"
                 data-player-container
               >
                 {spec && isSpecComplete(spec) ? (

@@ -248,7 +248,7 @@ export default function AdventurePage() {
 
   if (!gameState) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-6 adventure-theme">
+      <div className="min-h-screen flex items-center justify-center p-4 sm:p-6 adventure-theme">
         <div className="w-full max-w-2xl">
           {/* Title */}
           <div className="text-center mb-10">
