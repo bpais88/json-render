@@ -292,10 +292,9 @@ pnpm install
 pnpm dev
 ```
 
-- http://localhost:3000 — Docs & Playground
-- http://localhost:3001 — Example Dashboard
-- http://localhost:3002 — Remotion Video Example
-- http://localhost:3010 — Showcase (all examples)
+- http://localhost:3000 — Showcase / Content Studio
+- http://localhost:3010 — Example Dashboard
+- http://localhost:3011 — Docs & Playground
 
 ## How It Works
 

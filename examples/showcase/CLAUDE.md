@@ -89,5 +89,5 @@ cp .env.example .env
 # Fill in AI_GATEWAY_API_KEY
 pnpm install
 pnpm dev
-# Visit http://localhost:3005
+# Visit http://localhost:3000
 ```
