@@ -5,10 +5,10 @@
 Use the `agent-browser` skill to test UI pages:
 
 ```
-/agent-browser visit http://localhost:3000
+/agent-browser visit http://localhost:3010
 ```
 
-The dashboard runs on `localhost:3000`. Use agent-browser to:
+The dashboard runs on `localhost:3010`. Use agent-browser to:
 - Visit individual example pages (`/support`, `/onboarding`, `/reports`, `/forms`, `/explorer`, `/invoices`)
 - Verify AI-generated UI renders correctly
 - Test navigation between pages
