@@ -260,8 +260,6 @@ export default function AdventurePage() {
             </p>
             <div className="mt-3 flex items-center justify-center gap-2 text-xs text-muted-foreground/50 font-mono">
               <span>powered by</span>
-              <span className="text-primary/60">json-render</span>
-              <span>+</span>
               <span className="text-primary/60">claude</span>
             </div>
           </div>
@@ -351,7 +349,7 @@ export default function AdventurePage() {
       <footer className="border-t border-border/20 py-2">
         <div className="max-w-3xl mx-auto px-4 flex items-center justify-between text-[10px] text-muted-foreground/40 font-mono">
           <span>ESC to return to menu</span>
-          <span>json-render / adventure</span>
+          <span>adventure</span>
         </div>
       </footer>
     </div>

@@ -88,11 +88,8 @@ export default function HomePage() {
       <div className="max-w-4xl mx-auto px-6 pt-24 pb-16">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="text-xs font-mono text-white/40 mb-4">
-            @json-render
-          </div>
           <h1 className="text-5xl sm:text-6xl font-bold tracking-tighter mb-4">
-            json-render
+            Content Studio
           </h1>
           <p className="text-lg text-white/50 max-w-2xl mx-auto leading-relaxed">
             Define a component catalog. Users prompt. AI generates structured
@@ -124,7 +121,7 @@ export default function HomePage() {
         {/* Footer */}
         <footer className="mt-16 text-center">
           <div className="text-xs text-white/20 font-mono">
-            built with json-render + claude
+            AI Content Studio
           </div>
         </footer>
       </div>
