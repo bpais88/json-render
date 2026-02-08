@@ -127,12 +127,7 @@ export default function DiagramsPage() {
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <div className="text-xs font-mono text-muted-foreground mb-1">
-                @json-render/diagrams
-              </div>
-              <h1 className="text-2xl font-bold tracking-tight">
-                AI &rarr; json-render &rarr; Flowchart
-              </h1>
+              <h1 className="text-2xl font-bold tracking-tight">Flowchart</h1>
             </div>
             <p className="text-sm text-muted-foreground max-w-sm text-right hidden sm:block">
               Describe a process. AI generates a graph spec. Dagre layouts it.

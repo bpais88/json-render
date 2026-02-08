@@ -278,11 +278,8 @@ export default function SlidesPage() {
     <div className="min-h-screen slides-theme">
       {/* Hero */}
       <section className="max-w-6xl mx-auto px-6 pt-20 pb-12 text-center">
-        <div className="text-xs font-mono text-muted-foreground mb-4">
-          @json-render/slides
-        </div>
         <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tighter mb-6">
-          AI &rarr; json-render &rarr; Slides
+          Slide Deck
         </h1>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
           Describe a presentation. AI generates slide JSON constrained to your

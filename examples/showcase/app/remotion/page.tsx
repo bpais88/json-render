@@ -265,11 +265,8 @@ export default function Home() {
     <div className="min-h-screen remotion-theme">
       {/* Hero */}
       <section className="max-w-5xl mx-auto px-6 pt-24 pb-16 text-center">
-        <div className="text-xs font-mono text-muted-foreground mb-4">
-          @json-render/remotion
-        </div>
         <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tighter mb-6">
-          AI &rarr; json-render &rarr; Video
+          Video
         </h1>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed">
           Define a video catalog. Users prompt. AI outputs timeline JSON
